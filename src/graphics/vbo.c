@@ -16,7 +16,7 @@ void vbo_bind(vbo_t self) {
 
 void vbo_buffer(vbo_t self, void* data, size_t size_bytes) {
   vbo_bind(self);
-  GL_CHECK(glBufferData(self.handle, size_bytes, data, GL_STATIC_DRAW));
+  GL_CHECK(glBufferData(self.type, size_bytes, data, GL_STATIC_DRAW));
 }
 
 void vbo_clear(GLint type) {

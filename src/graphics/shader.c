@@ -9,9 +9,9 @@ static void _compile(char* path, GLenum type, GLuint* location) {
   FILE* f;
   char* text;
   long len;
-  char* shader_type = (type == GL_VERTEX_SHADER) ? "shader" : "fragment";
+  char* shader_type = (type == GL_VERTEX_SHADER) ? "vertex" : "fragment";
 
-  f = fopen(path, "r");
+  f = fopen(path, "rb");
   if (!f) {
     fprintf(stderr, "%s %s\n", "Error opening file at", path);
     exit(1);
@@ -52,11 +52,17 @@ shader_t shader_create(char* vsh, char* fsh) {
   GL_CHECK(self.handle = glCreateProgram());
   GL_CHECK(glAttachShader(self.handle, self.vertex_handle));
   GL_CHECK(glAttachShader(self.handle, self.fragment_handle));
+  glLinkProgram(self.handle);
 
   GLint linked;
   GL_CHECK(glGetProgramiv(self.handle, GL_LINK_STATUS, &linked));
   if (linked == GL_FALSE) {
-    fprintf(stderr, "%s", "Error linking shader\n");
+    GLint length;
+    GL_CHECK(glGetShaderiv(self.handle, GL_INFO_LOG_LENGTH, &length));
+    char* message = (char*)malloc(length * sizeof(char));
+    GL_CHECK(glGetShaderInfoLog(self.handle, length, &length, message));
+    fprintf(stderr, "Error linking shader: %s\n", message);
+    free(message);
     exit(1);
   }
 
@@ -71,4 +77,9 @@ void shader_destroy(shader_t self) {
 
 void shader_bind(shader_t self) {
   GL_CHECK(glUseProgram(self.handle));
+}
+
+void shader_uniform_mat4(shader_t self, const char* name, float* mat) {
+  GL_CHECK(glUniformMatrix4fv(glGetUniformLocation(self.handle, name), 1,
+                              GL_FALSE, mat));
 }
