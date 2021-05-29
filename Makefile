@@ -5,8 +5,8 @@ CC=clang
 CFLAGS = -std=c11 -O3 -g -Wall -Wextra -Wpedantic -Wstrict-aliasing
 CFLAGS += -Wno-pointer-arith -Wno-newline-eof -Wno-unused-parameter -Wno-gnu-statement-expression
 CFLAGS += -Wno-gnu-compound-literal-initializer -Wno-gnu-zero-variadic-macro-arguments
-CFLAGS += -isystem lib/glfw/include -isystem lib/glad/include # -isystem lib/stb
-LDFLAGS = lib/glad/src/glad.o lib/glfw/src/libglfw3.a -lm
+CFLAGS += -isystem lib/glfw/include -isystem lib/glad/include -isystem lib/cglm/include
+LDFLAGS = lib/glad/src/glad.o lib/glfw/src/libglfw3.a lib/cglm/build/libcglm.a -lm
 
 ifeq ($(UNAME_S), Darwin)
 	CFLAGS += -F /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks
@@ -28,6 +28,7 @@ all: dirs libs main
 libs:
 	cd lib/glad && $(CC) -o src/glad.o -Iinclude -c src/glad.c
 	cd lib/glfw && cmake . && make
+	cd lib/cglm && mkdir -p build && cd build && cmake .. && make
 
 dirs:
 	mkdir -p ./$(BIN)

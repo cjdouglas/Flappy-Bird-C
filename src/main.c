@@ -1,29 +1,30 @@
+#include "game/game.h"
 #include "graphics/graphics.h"
 #include "graphics/renderer.h"
 #include "graphics/window.h"
+#include "state.h"
 
-renderer_t renderer;
+state_t state;
 
 static void _init() {
-  renderer_init(&renderer);
+  game_init(&state.game);
+  state.window = &window;
+  renderer_init(&state.renderer, state.game.bird);
+  renderer_init_cam(&state.renderer, 0.0f, state.window->w, state.window->h,
+                    0.0f, 1.0f, -1.0f);
 }
 
 static void _destroy() {
-  renderer_destroy(&renderer);
+  renderer_destroy(&state.renderer);
+  game_destroy(&state.game);
 }
 
-static void _tick() {}
-
-static void _update() {}
-
 static void _render() {
-  renderer_update_projection(&renderer, 0.0f, window.w, 0.0f, window.h, -1.0f,
-                             1.0f);
-  renderer_draw(&renderer);
+  renderer_draw(&state.renderer);
 }
 
 int main(int argc, char** argv) {
-  window_create(_init, _destroy, _tick, _update, _render);
+  window_create(_init, _destroy, _render);
   window_mainloop();
 
   return 0;
