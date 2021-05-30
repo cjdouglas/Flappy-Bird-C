@@ -83,3 +83,7 @@ void shader_uniform_mat4(shader_t self, const char* name, float* mat) {
   GL_CHECK(glUniformMatrix4fv(glGetUniformLocation(self.handle, name), 1,
                               GL_FALSE, mat));
 }
+
+void shader_uniform_vec3(shader_t self, const char* name, float* vec) {
+  GL_CHECK(glUniform3fv(glGetUniformLocation(self.handle, name), 1, vec));
+}

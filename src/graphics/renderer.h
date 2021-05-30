@@ -4,12 +4,16 @@
 #include <cglm/mat4.h>
 
 #include "shader.h"
+#include "vao.h"
+#include "vbo.h"
 #include "../entity/bird.h"
+#include "../entity/pipe.h"
 
 typedef struct renderer {
   shader_t shader;
 
   bird_t* bird;
+  pipe_t* pipe;
 
   mat4 projection;
 
@@ -17,7 +21,7 @@ typedef struct renderer {
   vbo_t vbo;
 } renderer_t;
 
-void renderer_init(renderer_t* self, bird_t* bird);
+void renderer_init(renderer_t* self, bird_t* bird, pipe_t* pipe);
 void renderer_init_cam(renderer_t* self, float left, float right, float bottom, float top, float near, float far);
 void renderer_draw(renderer_t* self);
 void renderer_destroy(renderer_t * self);
