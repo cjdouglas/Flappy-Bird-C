@@ -9,16 +9,6 @@
 state_t state;
 window_t window;
 
-static void _process_input() {
-  if (glfwGetKey(window.handle, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-    glfwSetWindowShouldClose(window.handle, true);
-  }
-
-  if (glfwGetKey(window.handle, GLFW_KEY_SPACE) == GLFW_PRESS) {
-    game_input(&state.game, GLFW_KEY_SPACE);
-  }
-}
-
 static void _keyboard_callback(GLFWwindow* window, int key, int scancode,
                                int action, int mods) {
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
@@ -98,8 +88,6 @@ void window_mainloop() {
     dt = current_frame - last_frame;
     last_frame = current_frame;
     _update_game(dt);
-
-    // _process_input();
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
