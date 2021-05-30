@@ -6,7 +6,6 @@
 *.ko
 *.obj
 *.elf
-!glad.o
 
 # Linker output
 *.ilk
@@ -22,7 +21,6 @@
 *.a
 *.la
 *.lo
-!libglfw3.a
 !libcglm.a
 
 # Shared objects (inc. Windows DLLs)
