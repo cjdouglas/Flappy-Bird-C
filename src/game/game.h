@@ -5,7 +5,7 @@
 #include "../entity/pipes.h"
 #include "../graphics/renderer.h"
 
-#define N_PIPES 4
+#define N_PIPES 3
 
 typedef struct game {
   bird_t* bird;

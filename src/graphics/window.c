@@ -19,6 +19,18 @@ static void _process_input() {
   }
 }
 
+static void _keyboard_callback(GLFWwindow* window, int key, int scancode,
+                               int action, int mods) {
+  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+    glfwSetWindowShouldClose(window, true);
+    return;
+  }
+
+  if (action == GLFW_PRESS) {
+    game_input(&state.game, key);
+  }
+}
+
 void window_create(window_action_t init, window_action_t destroy,
                    window_action_t render) {
   window.actions.init = init;
@@ -49,6 +61,7 @@ void window_create(window_action_t init, window_action_t destroy,
   }
 
   glfwMakeContextCurrent(window.handle);
+  glfwSetKeyCallback(window.handle, _keyboard_callback);
 
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     fprintf(stderr, "%s", "Error initializing GLAD\n");
@@ -86,7 +99,7 @@ void window_mainloop() {
     last_frame = current_frame;
     _update_game(dt);
 
-    _process_input();
+    // _process_input();
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);

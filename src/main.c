@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <time.h>
+
 #include "game/game.h"
 #include "graphics/graphics.h"
 #include "graphics/renderer.h"
@@ -25,6 +28,8 @@ static void _render() {
 }
 
 int main(int argc, char** argv) {
+  time_t t;
+  srand((unsigned)time(&t));
   window_create(_init, _destroy, _render);
   window_mainloop();
 

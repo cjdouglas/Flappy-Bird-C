@@ -5,7 +5,7 @@
 #include <cglm/mat4.h>
 
 #define PIPE_WIDTH 75
-#define PIPE_GAP 175
+#define PIPE_GAP 150
 #define PIPE_VELOCITY 150.0f
 
 typedef struct pipes {
@@ -21,6 +21,7 @@ typedef struct pipes {
 
 pipes_t* pipes_create();
 void pipes_update(pipes_t* self, float dt);
-void pipes_reset(pipes_t* self, const float x0, float height);
+void pipes_set(pipes_t* self, const float x0, float height);
+void pipes_reset(pipes_t* self);
 
 #endif // PIPE_H

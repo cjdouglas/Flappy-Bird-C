@@ -18,5 +18,6 @@ typedef struct bird {
 bird_t* bird_create();
 void bird_flap(bird_t* self);
 void bird_update(bird_t* self, float dt);
+void bird_reset(bird_t* self);
 
 #endif // BIRD_H

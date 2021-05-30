@@ -6,7 +6,7 @@
 #include "game/game.h"
 
 typedef enum game_state {
-  MAIN_MENU, PLAYING
+  MAIN_MENU, LIVE, DEAD
 } game_state_t;
 
 typedef struct state {

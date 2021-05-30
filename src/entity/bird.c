@@ -16,23 +16,25 @@ static void _set_model_mat(bird_t* self) {
 
 bird_t* bird_create() {
   bird_t* self = (bird_t*)malloc(sizeof(bird_t));
-  glm_vec2((float[2]){X_START, Y_START - (BIRD_WIDTH / 2.0f)}, self->position);
-  glm_vec2((float[2]){BIRD_WIDTH, BIRD_HEIGHT}, self->size);
-  self->velocity = 0.0f;
-  self->acceleration = GRAVITY;
+  bird_reset(self);
   _set_model_mat(self);
   return self;
 }
 
 void bird_flap(bird_t* self) {
-  self->velocity = -6.9f;
+  self->velocity = -9.0f;
 }
 
 void bird_update(bird_t* self, float dt) {
-  // Update position
   self->velocity += self->acceleration * dt;
   self->position[1] += self->velocity;
+  _set_model_mat(self);
+}
 
-  // Build model matrix
+void bird_reset(bird_t* self) {
+  glm_vec2((float[2]){X_START, Y_START - (BIRD_WIDTH / 2.0f)}, self->position);
+  glm_vec2((float[2]){BIRD_WIDTH, BIRD_HEIGHT}, self->size);
+  self->velocity = 0.0f;
+  self->acceleration = GRAVITY;
   _set_model_mat(self);
 }
