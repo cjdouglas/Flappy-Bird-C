@@ -5,14 +5,12 @@
 
 #define X_START 60
 #define Y_START 300
-#define WIDTH 30
-#define HEIGHT 30
 #define GRAVITY 30
 
 bird_t* bird_create() {
   bird_t* self = (bird_t*)malloc(sizeof(bird_t));
-  glm_vec2((float[2]){X_START, Y_START - (WIDTH / 2.0f)}, self->position);
-  glm_vec2((float[2]){WIDTH, HEIGHT}, self->size);
+  glm_vec2((float[2]){X_START, Y_START - (BIRD_WIDTH / 2.0f)}, self->position);
+  glm_vec2((float[2]){BIRD_WIDTH, BIRD_HEIGHT}, self->size);
   self->velocity = 0.0f;
   self->acceleration = GRAVITY;
 

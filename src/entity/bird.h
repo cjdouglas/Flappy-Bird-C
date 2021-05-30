@@ -4,6 +4,9 @@
 #include <cglm/vec2.h>
 #include <cglm/mat4.h>
 
+#define BIRD_WIDTH 30
+#define BIRD_HEIGHT 30
+
 typedef struct bird {
   vec2 position;
   vec2 size;
