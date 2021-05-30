@@ -17,5 +17,5 @@ void game_input(game_t* self, int key) {
 }
 
 void game_destroy(game_t* self) {
-  bird_destroy(self->bird);
+  free(self->bird);
 }

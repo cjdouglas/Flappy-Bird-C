@@ -12,6 +12,9 @@ typedef struct renderer {
   bird_t* bird;
 
   mat4 projection;
+
+  vao_t vao;
+  vbo_t vbo;
 } renderer_t;
 
 void renderer_init(renderer_t* self, bird_t* bird);
