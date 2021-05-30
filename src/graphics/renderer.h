@@ -13,7 +13,8 @@ typedef struct renderer {
   shader_t shader;
 
   bird_t* bird;
-  pipes_t* pipe;
+  pipes_t** pipes;
+  size_t n_pipes;
 
   mat4 projection;
 
@@ -21,7 +22,7 @@ typedef struct renderer {
   vbo_t vbo;
 } renderer_t;
 
-void renderer_init(renderer_t* self, bird_t* bird, pipes_t* pipe);
+void renderer_init(renderer_t* self, bird_t* bird, pipes_t** pipe, size_t n_pipes);
 void renderer_init_cam(renderer_t* self, float left, float right, float bottom, float top, float near, float far);
 void renderer_draw(renderer_t* self);
 void renderer_destroy(renderer_t * self);

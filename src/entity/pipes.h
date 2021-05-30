@@ -15,13 +15,12 @@ typedef struct pipes {
   vec2 size_bottom;
   vec2 size_top;
 
-  float velocity;
-
   mat4 model_bottom;
   mat4 model_top;
 } pipes_t;
 
-pipes_t* pipes_create(const float x0, const float height);
+pipes_t* pipes_create();
 void pipes_update(pipes_t* self, float dt);
+void pipes_reset(pipes_t* self, const float x0, float height);
 
 #endif // PIPE_H

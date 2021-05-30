@@ -4,16 +4,19 @@
 
 #include "../state.h"
 
-pipes_t* pipes_create(const float x0, const float height) {
-  pipes_t* self = (pipes_t*)malloc(sizeof(pipes_t));
+pipes_t* pipes_create() {
+  pipes_t* self = malloc(sizeof(pipes_t));
+  pipes_reset(self, -100, 0);
+  return self;
+}
+
+void pipes_reset(pipes_t* self, const float x0, const float height) {
   glm_vec2((float[2]){PIPE_WIDTH, height}, self->size_bottom);
   glm_vec2((float[2]){PIPE_WIDTH, state.window->h - PIPE_GAP - height},
            self->size_top);
 
   glm_vec2((float[2]){x0, 0}, self->position_bottom);
   glm_vec2((float[2]){x0, height + PIPE_GAP}, self->position_top);
-
-  return self;
 }
 
 void pipes_update(pipes_t* self, float dt) {
