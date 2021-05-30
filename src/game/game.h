@@ -2,12 +2,12 @@
 #define GAME_H
 
 #include "../entity/bird.h"
-#include "../entity/pipe.h"
+#include "../entity/pipes.h"
 #include "../graphics/renderer.h"
 
 typedef struct game {
   bird_t* bird;
-  pipe_t* pipe;
+  pipes_t* pipes;
 } game_t;
 
 void game_init(game_t* self);

@@ -6,7 +6,7 @@
 
 #include "../entity/bird.h"
 
-void renderer_init(renderer_t* self, bird_t* bird, pipe_t* pipe) {
+void renderer_init(renderer_t* self, bird_t* bird, pipes_t* pipe) {
   self->shader =
       shader_create("res/basic_vertex.glsl", "res/basic_fragment.glsl");
   self->bird = bird;
@@ -36,12 +36,14 @@ void renderer_draw(renderer_t* self) {
   vao_bind(self->vao);
 
   // Draw bird
-  shader_uniform_mat4(self->shader, "model", (float*)self->bird->model);
   shader_uniform_vec3(self->shader, "color", (vec3){1.0f, 1.0f, 1.0f});
+  shader_uniform_mat4(self->shader, "model", (float*)self->bird->model);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-  shader_uniform_mat4(self->shader, "model", (float*)self->pipe->model);
   shader_uniform_vec3(self->shader, "color", (vec3){0.0f, 0.6f, 0.2f});
+  shader_uniform_mat4(self->shader, "model", (float*)self->pipe->model_bottom);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  shader_uniform_mat4(self->shader, "model", (float*)self->pipe->model_top);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
   vao_clear();

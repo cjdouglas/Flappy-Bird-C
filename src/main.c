@@ -7,9 +7,9 @@
 state_t state;
 
 static void _init() {
-  game_init(&state.game);
   state.window = &window;
-  renderer_init(&state.renderer, state.game.bird, state.game.pipe);
+  game_init(&state.game);
+  renderer_init(&state.renderer, state.game.bird, state.game.pipes);
   renderer_init_cam(&state.renderer, 0.0f, state.window->w, state.window->h,
                     0.0f, 1.0f, -1.0f);
 }

@@ -1,15 +1,13 @@
 #include "game.h"
 
-#include "../entity/bird.h"
-
 void game_init(game_t* self) {
   self->bird = bird_create();
-  self->pipe = pipe_create();
+  self->pipes = pipes_create(200, 350);
 }
 
 void game_update(game_t* self, float dt) {
   bird_update(self->bird, dt);
-  pipe_update(self->pipe, dt);
+  pipes_update(self->pipes, dt);
 }
 
 void game_input(game_t* self, int key) {
